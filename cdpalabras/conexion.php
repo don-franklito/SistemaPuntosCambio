@@ -4,7 +4,7 @@
         $user = "root";
         $pass = "";
 
-        $bd = "dbpuntoscambio";
+        $bd = "palabras";
 
         $con = mysqli_connect($host, $user, $pass);
 
