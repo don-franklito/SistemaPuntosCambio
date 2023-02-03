@@ -12,4 +12,13 @@
 
         return $con;
     }
-?>
+  /*   $servidor = "localhost";
+    $usuario = "root";
+    $password = "";
+    $nameBD = "palabras";
+    $conexion = new mysqli($servidor, $usuario, $password, $nameBD);
+
+
+    if ($conexion->connect_error) {
+        die("la conexión ha fallado: " . $conexion->connect_error);
+    } */

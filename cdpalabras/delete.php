@@ -12,4 +12,4 @@
         echo "Registro eliminado correctamente";
         Header("Location: index.php");
     }
-?>
+

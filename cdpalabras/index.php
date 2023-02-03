@@ -1,5 +1,7 @@
 <?php
 include("conexion.php");
+
+
 $con = conectar();
 
 $sql = "SELECT * FROM palabras p INNER JOIN lenguajes l ON p.Lenguaje_ID = l.Lenguaje_ID";
@@ -29,14 +31,18 @@ $rec = mysqli_query($con, $len);
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../css/plugins/notie.min.css">
+    <link rel="stylesheet" href="../css/botones.css">
+    <script src="../js/plugins/notie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../main.css">
+
 </head>
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="bg-secondary p-5">
+    <header class="">
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top ">
             <a class="navbar-brand" href="#">Puntos de Cambio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,37 +62,35 @@ $rec = mysqli_query($con, $len);
             </div>
         </nav>
     </header>
-    <div class="container mt-5">
+
+    <?php
+
+    if (!isset($_POST['palabraClave'])) {
+        $_POST['palabraClave'] = '';
+    }
+    if (!isset($_POST['lenguaje'])) {
+        $_POST['lenguaje'] = '';
+    }
+
+    ?>
+
+    <div class=" rounded-3 container p-5 bg-light ">
         <div class="row">
-            <div class="col-md-3">
-                <h2>Agregar palabra</h2>
-                <form action="insertar.php" method="POST">
-                    <input type="text" class="form-control mb-3" placeholder="Palabra" name="palabraClave" id="palabraClave">
-                    <select name="lenguaje" id="lenguaje" class="form-select">
+            <div class="col-sm-4">
+                <h5>Agregar palabra</h5>
+                <form action="insertar.php" class="w-50" value="lenguaje" method="POST">
+                    <input type="text" class="form-control mb-3" autofocus required placeholder="Palabra" name="palabraClave" id="palabraClave" value="<?php echo $_POST["palabraClave"] ?>">
+                    <select name="lenguaje" id="lenguaje" class="form-select" value="<?php echo $_POST["lenguaje"] ?>">
                         <?php while ($fila = $rec->fetch_assoc()) : ?>
                             <option value="<?= $fila['Lenguaje_ID'] ?>"><?= $fila['Lenguaje_Nombre'] ?></option>
                         <?php endwhile; ?>
                     </select>
                     <br>
-                    <input type="submit" class="btn btn-primary">
+                    <input type="submit" class="btn btn-primary1">
                 </form>
             </div>
-
-
-            // Tabla con Filtro
-
-
+          
             <?php
-
-            $servidor = "localhost";
-            $usuario = "root";
-            $password = "";
-            $nameBD = "palabras";
-            $conexion = new mysqli($servidor, $usuario, $password, $nameBD);
-            if ($conexion->connect_error) {
-                die("la conexión ha fallado: " . $conexion->connect_error);
-            }
-
 
             if (!isset($_POST['buscar'])) {
                 $_POST['buscar'] = '';
@@ -95,180 +99,126 @@ $rec = mysqli_query($con, $len);
                 $_POST['buscarLenguaje'] = '';
             }
 
-
-
             ?>
 
+            <div class="col-sm-8 ">
+                <div class="col-12 grid-margin">
+                    <div class="">
+                        <div class="card-body">
 
+                            <form id="form2" name="form2" method="POST" action="index.php">
+                                <div class="col-12 row">
 
+                                    <div class="col-sm-6">
+                                        <label class=" form-label">Palabra a buscar</label>
+                                        <input type="text" class="w-50 form-control" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
+                                    </div>
 
-            <div class="container mt-5">
-                <div class="col-12">
+                                    <div class=" row col-sm-6">
 
-
-
-                    <div class="row">
-                        <div class="col-12 grid-margin">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <h4 class="card-title">Buscador</h4>
-
-
-                                    <form id="form2" name="form2" method="POST" action="index.php">
-                                        <div class="col-12 row">
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Palabra a buscar</label>
-                                                <input type="text" class="form-control" id="buscar" name="buscar" value="<?php echo $_POST["buscar"] ?>">
-                                            </div>
-
-                                            <h4 class="card-title">Filtro de búsqueda</h4>
-
-                                            <div class="col-11">
-
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr class="filters">
-                                                            <th>
-                                                                Lenguaje
-                                                                <select id="assigned-tutor-filter" id="buscarLenguaje" name="buscarLenguaje" class="form-control mt-2" style="border: #bababa 1px solid; color:#000000;">
-                                                                    <?php if ($_POST["buscarLenguaje"] != '') { ?>
-                                                                        <option value="<?php echo $_POST["buscarLenguaje"]; ?>"><?php echo $_POST["buscarLenguaje"]; ?></option>
-                                                                    <?php } ?>
-                                                                    <option value="">Todos</option>
-                                                                    <option value="Java">Java</option>
-                                                                    <option value="Javascript">Javascript</option>
-                                                                    <option value="Phyton">Python</option>
-                                                                </select>
-                                                            </th>
-
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-
-
-                                            <div class="col-1">
-                                                <input type="submit" class="btn " value="Ver" style="margin-top: 38px; background-color: purple; color: white;">
-                                            </div>
+                                        <label class=" form-label">Lenguajes</label>
+                                        <select id="assigned-tutor-filter" id="buscarLenguaje" name="buscarLenguaje" class="w-50 col-8 form-control " style="border: #bababa 1px solid; ">
+                                            <?php if ($_POST["buscarLenguaje"] != '') { ?>
+                                                <option value="<?php echo $_POST["buscarLenguaje"]; ?>"><?php echo $_POST["buscarLenguaje"]; ?></option>
+                                            <?php } ?>
+                                            <option value="">Todos</option>
+                                            <option value="Java">Java</option>
+                                            <option value="Javascript">Javascript</option>
+                                            <option value="Python">Python</option>
+                                            <option value="C++">C++</option>
+                                            <option value="C#">C#</option>
+                                        </select>
+                                        <div class="col-4">
+                                            <input type="submit" class="w-100  btn btn-primary1 " value="Ver"">
                                         </div>
 
-
-                                        <?php
-                                        /*FILTRO de busqueda////////////////////////////////////////////*/
-                                        if ($_POST['buscar'] == '') {
-                                            $_POST['buscar'] = ' ';
-                                        }
-                                        $aKeyword = explode(" ", $_POST['buscar']);
-
-
-                                        if ($_POST["buscar"] == '' and $_POST['buscarLenguaje'] == '') {
-                                            $query = "SELECT * FROM palabras AS p  JOIN lenguajes AS l ON p.Lenguaje_ID = l.Lenguaje_ID ";
-                                        } else {
-
-
-                                            $query =  "SELECT * FROM palabras AS p JOIN lenguajes AS l ON p.Lenguaje_ID = l.Lenguaje_ID ";
-
-                                            if ($_POST["buscar"] != '') {
-                                                $query .= " WHERE (Palabra_Nombre LIKE LOWER('%" . $aKeyword[0] . "%') OR Lenguaje_Nombre LIKE LOWER('%" . $aKeyword[0] . "%')) ";
-
-                                                for ($i = 1; $i < count($aKeyword); $i++) {
-                                                    if (!empty($aKeyword[$i])) {
-                                                        $query .= " OR Palabra_Nombre LIKE '%" . $aKeyword[$i] . "%' OR Lenguaje_Nombre LIKE '%" . $aKeyword[$i] . "%'";
-                                                    }
-                                                }
-                                            }
-
-                                            if ($_POST["buscarLenguaje"] != '') {
-                                                $query .= " AND Lenguaje_Nombre = '" . $_POST['buscarLenguaje'] . "' ";
-                                            }
-                                        }
-
-
-                                        $sql = $conexion->query($query);
-
-                                        $numeroSql = mysqli_num_rows($sql);
-
-                                        ?>
-                                        <p style="font-weight: bold; color:purple;"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
-                                    </form>
-
-
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr style="background-color:purple; color:#FFFFFF;">
-                                                    <th style=" text-align: center;"> Palabras </th>
-                                                    <th style=" text-align: center;"> Lenguaje </th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
-
-                                                    <tr>
-                                                        <td style="text-align: center;"><?php echo $rowSql["Lenguaje_Nombre"]; ?></td>
-                                                        <td style="text-align: center;"><?php echo $rowSql["Palabra_Nombre"]; ?></td>
-
-                                                    </tr>
-
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
                                     </div>
 
 
+                                   
                                 </div>
+
+
+                                <?php
+
+                                /*FILTRO de busqueda*/
+
+
+
+                                if ($_POST['buscar'] == '') {
+                                    $_POST['buscar'] = ' ';
+                                }
+                                $aKeyword = explode(" ", $_POST['buscar']);
+
+
+                                if ($_POST["buscar"] == '' and $_POST['buscarLenguaje'] == '') {
+                                    $query = "SELECT * FROM palabras AS p  JOIN lenguajes AS l ON p.Lenguaje_ID = l.Lenguaje_ID ";
+                                } else {
+
+
+                                    $query =  "SELECT * FROM palabras AS p JOIN lenguajes AS l ON p.Lenguaje_ID = l.Lenguaje_ID ";
+
+                                    if ($_POST["buscar"] != '') {
+                                        $query .= " WHERE (Palabra_Nombre LIKE LOWER('%" . $aKeyword[0] . "%') OR Lenguaje_Nombre LIKE LOWER('%" . $aKeyword[0] . "%')) ";
+
+                                        for ($i = 1; $i < count($aKeyword); $i++) {
+                                            if (!empty($aKeyword[$i])) {
+                                                $query .= " OR Palabra_Nombre LIKE '%" . $aKeyword[$i] . "%' OR Lenguaje_Nombre LIKE '%" . $aKeyword[$i] . "%'";
+                                            }
+                                        }
+                                    }
+
+                                    if ($_POST["buscarLenguaje"] != '') {
+                                        $query .= " AND Lenguaje_Nombre = '" . $_POST['buscarLenguaje'] . "' ";
+                                    }
+                                }
+
+
+                                $sql = $con->query($query);
+
+                                $numeroSql = mysqli_num_rows($sql);
+
+                                ?>
+                                <p class=" text-primary"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
+                            </form>
+
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="bg-primary" style=" text-align: center;"> Palabras </th>
+                                            <th class="bg-primary" style=" text-align: center;"> Lenguaje </th>
+                                            <th class="bg-primary" style=" text-align: center;"> Acciones </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
+
+                                            <tr>
+
+                                                <td style="text-align: center;" class=""><?php echo $rowSql["Palabra_Nombre"]; ?></td>
+                                                <td style="text-align: center;" class=""><?php echo $rowSql["Lenguaje_Nombre"]; ?></td>
+                                                <td class="border border-0 d-flex justify-content-around mb-3">
+                                                    <a class="btn btn-edit btn-bloc text-light " href="actualizar.php?id=<?php echo $rowSql['Palabras_ID'] ?>" class=" text-success">Editar</a>
+                                                    <a class="btn btn-delete btn-bloc text-light" href="delete.php?id=<?php echo $rowSql['Palabras_ID'] ?>" class=" text-danger">Eliminar</a>
+
+                                                </td>
+
+
+                                            </tr>
+
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
+
+
                         </div>
                     </div>
-
-
                 </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-            //Tabla sin filtro
-
-
-
-
-            <div class="col-md-8">
-                <table id="example" class="table table-striped " cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Lenguaje</th>
-                            <th>Palabra</th>
-                            <th colspan="2">Acciones</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <?php
-                        while ($row = mysqli_fetch_array($query)) {
-                        ?>
-                            <tr>
-                                <td><?php echo $row['Lenguaje_Nombre'] ?></td>
-                                <td><?php echo $row['Palabra_Nombre'] ?></td>
-                                <td class="col-md-1"><a href="actualizar.php?id=<?php echo $row['Palabras_ID'] ?>" class="text-success"><i class="bi bi-pencil-square"></i< /a>
-                                </td>
-                                <td class="col-md-1"><a href="delete.php?id=<?php echo $row['Palabras_ID'] ?>" class="text-danger"><i class="bi bi-trash"></i></a></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

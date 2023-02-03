@@ -1,0 +1,71 @@
+/*botones básicos*/
+.btn-primary1 {
+    color: #fff;
+    background-color: #2271b3;
+    border-color: #2271b3
+}
+
+.btn-primary1:hover {
+    color: #fff;
+    background-color: #1f69a6;
+    border-color: #1f69a6
+}
+
+.btn-primary1:focus,
+.btn-primary.focus {
+    box-shadow: 0 0 0 .2rem rgba(91, 194, 194, 0.5)
+}
+
+/* botón borrar*/
+.btn-delete {
+    color: #fff;
+    background-color: #ae2121;
+    border-color: #ae2121
+}
+
+.btn-delete:hover {
+    color: #fff;
+    background-color: #9c1e1e;
+    border-color: #9c1e1e
+}
+
+.btn-delete:focus,
+.btn-delete.focus {
+    box-shadow: 0 0 0 .2rem rgba(154, 21, 21, 0.5)
+}
+
+/* botón edit*/
+.btn-edit {
+    color: #fff;
+    background-color: #fc9303;
+    border-color: #fc9303
+}
+
+.btn-edit:hover {
+    color: #fff;
+    background-color: #bf7103;
+    border-color: #bf7103
+}
+
+.btn-edit:focus,
+.btn-edit.focus {
+    box-shadow: 0 0 0 .2rem rgba(244, 180, 91, 0.5)
+}
+
+/* botón xslx*/
+.btn-xslx {
+    color: #fff;
+    background-color: #287233;
+    border-color: #287233
+}
+
+.btn-xslx:hover {
+    color: #fff;
+    background-color: #215f2a;
+    border-color: #215f2a
+}
+
+.btn-xslx:focus,
+.btn-xslx.focus {
+    box-shadow: 0 0 0 .2rem #339742
+}
