@@ -15,6 +15,32 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
+    <script src="jquery/jquery-3.3.1.min.js"></script>
+    <!-- <script src="popper/popper.min.js"></script> -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="datatables/datatables.min.js"></script>
+
+
+    <!--Para usar los botones-->
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+
+    <!--Para los estilos en Excel-->
+    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min"></script> -->
+
+    <!-- <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script> -->
+
+
+
+    <script type="text/javascript" src="main.js"></script>
+
+
 </head>
 
 <body>
@@ -73,31 +99,7 @@
         </div>
     </div>
 
-    <script src="jquery/jquery-3.3.1.min.js"></script>
-    <script src="popper/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>
-
-
-    <!--Para usar los botones-->
-    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-
-    <!--Para los estilos en Excel-->
-    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min"></script>
-
-    <!-- <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script> -->
-
-
-
-    <script type="text/javascript" src="main.js"></script>
-
+    
 
 </body>
 
