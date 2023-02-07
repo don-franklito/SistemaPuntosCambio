@@ -4,12 +4,12 @@ $con = conectar();
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM palabras p INNER JOIN lenguajes l ON p.Lenguaje_ID = l.Lenguaje_ID WHERE Palabras_ID = '$id'";
+$sql = "SELECT * FROM palabras p INNER JOIN lenguaje l ON p.fk_id_pal = l.id_leng WHERE id_pal = '$id'";
 $query = mysqli_query($con, $sql);
 
 $row = mysqli_fetch_array($query);
 
-$len = "SELECT * FROM lenguajes";
+$len = "SELECT * FROM lenguaje";
 
 $sql2 = $con->query($len);
 $numeroSql2 = mysqli_num_rows($sql2);
@@ -30,6 +30,7 @@ $numeroSql2 = mysqli_num_rows($sql2);
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="../js/alertas.notie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
 </head>
@@ -37,20 +38,20 @@ $numeroSql2 = mysqli_num_rows($sql2);
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
             <h4 class="text-white">Puntos de Cambio</h4>
 
         </nav>
     </header>
 
     <div class="container mt-5 d-flex justify-content-center">
-        <form class="justify-content-around" action="update.php?id=<?= $id ?>" method="POST">
+        <form class="justify-content-around" action="update.php?id=<?= $id ?>" onsubmit=" alertaActualizar();return false" method="POST">
             <div>
-                <input type="text" class="form-control mb-3 " name="palabraClave" value="<?php echo $row['Palabra_Nombre']  ?>">
+                <input type="text" class="form-control mb-3 " name="palabraClave" value="<?php echo $row['nombre_pal']  ?>">
                 <select name="lenguaje" id="lenguaje" class="form-control mb-3 ">
 
                     <?php while ($fila = $sql2->fetch_assoc()) : ?>
-                        <option class="w-50" value="<?= $fila['Lenguaje_ID'] ?>"><?= $fila['Lenguaje_Nombre'] ?></option>
+                        <option class="w-50" value="<?= $fila['id_leng'] ?>"><?= $fila['nombre_leng'] ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>

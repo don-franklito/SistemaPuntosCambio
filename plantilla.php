@@ -141,7 +141,7 @@ session_start();
 		</nav>
 	</head>
 
-	<div class="container-fluid">
+	<div class="container-fluid bg-light">
 
 		<div class="container-fluid  py-5">
 

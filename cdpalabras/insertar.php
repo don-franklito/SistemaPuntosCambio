@@ -1,16 +1,20 @@
-<?php
-include("conexion.php");
-$con = conectar();
+ <?php
+ include("conexion.php"); 
+ 
 
-$palabraClave = $_POST['palabraClave'];
-$lenguajeID = $_POST['lenguaje'];
+    $con = conectar();
 
-$sql = "INSERT INTO palabras VALUES ('','{$palabraClave}', '{$lenguajeID}')";
+   $palabraClave = $_POST['palabraClave'];
+    $lenguajeID = $_POST['lenguaje']; 
 
-$query = mysqli_query($con, $sql);
+    $sql = "INSERT INTO palabras VALUES ('','{$palabraClave}', '{$lenguajeID}')";
 
+    
+
+    $query = mysqli_query($con, $sql);
+    
 
 if ($query) {
-    Header("Location: index.php");
+      Header("Location: index.php?mensaje=1");
 } else {
-}
+} 

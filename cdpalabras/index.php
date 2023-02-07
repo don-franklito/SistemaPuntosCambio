@@ -4,13 +4,13 @@ include("conexion.php");
 
 $con = conectar();
 
-$sql = "SELECT * FROM palabras p INNER JOIN lenguajes l ON p.Lenguaje_ID = l.Lenguaje_ID";
+$sql = "SELECT * FROM palabras p INNER JOIN lenguaje l ON p.fk_id_pal = l.id_leng";
 
 $query = mysqli_query($con, $sql);
 
 $row = mysqli_fetch_array($query);
 
-$len = "SELECT * FROM lenguajes";
+$len = "SELECT * FROM lenguaje";
 $rec = mysqli_query($con, $len);
 
 ?>
@@ -32,15 +32,17 @@ $rec = mysqli_query($con, $len);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="/PC/SistemaPuntosCambio/css/menu.css">
     <link rel="stylesheet" href="../css/plugins/notie.min.css">
     <link rel="stylesheet" href="../css/botones.css">
     <script src="../js/plugins/notie.min.js"></script>
+    <script src="../js/alertas.notie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
 </head>
 
-<body class="bg-secondary p-5">
+<body class="bg-light p-5">
     <header class="">
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top ">
             <a class="navbar-brand" href="#">Puntos de Cambio</a>
@@ -82,22 +84,38 @@ $rec = mysqli_query($con, $len);
                     <input type="text" class="form-control mb-3" autofocus required placeholder="Palabra" name="palabraClave" id="palabraClave" value="<?php echo $_POST["palabraClave"] ?>">
                     <select name="lenguaje" id="lenguaje" class="form-select" value="<?php echo $_POST["lenguaje"] ?>">
                         <?php while ($fila = $rec->fetch_assoc()) : ?>
-                            <option value="<?= $fila['Lenguaje_ID'] ?>"><?= $fila['Lenguaje_Nombre'] ?></option>
+                            <option value="<?= $fila['id_leng'] ?>"><?= $fila['nombre_leng'] ?></option>
                         <?php endwhile; ?>
                     </select>
                     <br>
                     <input type="submit" class="btn btn-primary1">
                 </form>
             </div>
-          
             <?php
 
+             if (isset($_GET['mensaje']) && $_GET['mensaje'] == 1) {
+                unset($_GET['mensaje']);
+                //header("Location: index.php");
+                echo "<script>alertas(1);</script>";
+
+            }elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 2) {
+                echo "<script>alertas(2);</script>";
+ 
+            }elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 3) {
+                echo "<script>alertas(3);</script>"; 
+            } 
+
+        
+
+           
+    
             if (!isset($_POST['buscar'])) {
                 $_POST['buscar'] = '';
             }
             if (!isset($_POST['buscarLenguaje'])) {
                 $_POST['buscarLenguaje'] = '';
             }
+
 
             ?>
 
@@ -152,24 +170,24 @@ $rec = mysqli_query($con, $len);
 
 
                                 if ($_POST["buscar"] == '' and $_POST['buscarLenguaje'] == '') {
-                                    $query = "SELECT * FROM palabras AS p  JOIN lenguajes AS l ON p.Lenguaje_ID = l.Lenguaje_ID ";
+                                    $query = "SELECT * FROM palabras AS p  JOIN lenguaje AS l ON p.fk_id_pal = l.id_leng ";
                                 } else {
 
 
-                                    $query =  "SELECT * FROM palabras AS p JOIN lenguajes AS l ON p.Lenguaje_ID = l.Lenguaje_ID ";
+                                    $query =  "SELECT * FROM palabras AS p JOIN lenguaje AS l ON p.fk_id_pal = l.id_leng";
 
                                     if ($_POST["buscar"] != '') {
-                                        $query .= " WHERE (Palabra_Nombre LIKE LOWER('%" . $aKeyword[0] . "%') OR Lenguaje_Nombre LIKE LOWER('%" . $aKeyword[0] . "%')) ";
+                                        $query .= " WHERE (nombre_pal LIKE LOWER('%" . $aKeyword[0] . "%') OR nombre_leng LIKE LOWER('%" . $aKeyword[0] . "%')) ";
 
                                         for ($i = 1; $i < count($aKeyword); $i++) {
                                             if (!empty($aKeyword[$i])) {
-                                                $query .= " OR Palabra_Nombre LIKE '%" . $aKeyword[$i] . "%' OR Lenguaje_Nombre LIKE '%" . $aKeyword[$i] . "%'";
+                                                $query .= " OR nombre_pal LIKE '%" . $aKeyword[$i] . "%' OR nombre_leng LIKE '%" . $aKeyword[$i] . "%'";
                                             }
                                         }
                                     }
 
                                     if ($_POST["buscarLenguaje"] != '') {
-                                        $query .= " AND Lenguaje_Nombre = '" . $_POST['buscarLenguaje'] . "' ";
+                                        $query .= " AND nombre_leng = '" . $_POST['buscarLenguaje'] . "' ";
                                     }
                                 }
 
@@ -199,11 +217,11 @@ $rec = mysqli_query($con, $len);
 
                                             <tr>
 
-                                                <td style="text-align: center;" class=""><?php echo $rowSql["Palabra_Nombre"]; ?></td>
-                                                <td style="text-align: center;" class=""><?php echo $rowSql["Lenguaje_Nombre"]; ?></td>
+                                                <td style="text-align: center;" class=""><?php echo $rowSql["nombre_pal"]; ?></td>
+                                                <td style="text-align: center;" class=""><?php echo $rowSql["nombre_leng"]; ?></td>
                                                 <td class="border border-0 d-flex justify-content-around mb-3">
-                                                    <a class="btn btn-edit btn-bloc text-light " href="actualizar.php?id=<?php echo $rowSql['Palabras_ID'] ?>" class=" text-success">Editar</a>
-                                                    <a class="btn btn-delete btn-bloc text-light" href="delete.php?id=<?php echo $rowSql['Palabras_ID'] ?>" class=" text-danger">Eliminar</a>
+                                                    <a class="btn btn-edit btn-bloc text-light " href="actualizar.php?id=<?php echo $rowSql['id_pal'] ?>" class=" text-success">Editar</a>
+                                                    <a onclick=" return confirmar();" class="btn btn-delete btn-bloc text-light text-danger" href="delete.php?id=<?php echo $rowSql['id_pal'] ?>">Eliminar</a>
 
                                                 </td>
 

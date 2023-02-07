@@ -5,11 +5,10 @@
 
     $palabraID = $_GET['id'];
 
-    $sql="DELETE FROM palabras  WHERE Palabras_ID = '$palabraID'";
+    $sql="DELETE FROM palabras  WHERE id_pal = '$palabraID'";
     $query=mysqli_query($con,$sql);
 
     if($query){
-        echo "Registro eliminado correctamente";
-        Header("Location: index.php");
+        Header("Location: index.php?mensaje=3");
     }
 
