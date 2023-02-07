@@ -43,8 +43,8 @@ $rec = mysqli_query($con, $len);
 
 </head>
 
-<body class="bg-light p-5">
-    <header class="">
+<body class=" p-5">
+    <header>
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top ">
             <a class="navbar-brand" href="#">Puntos de Cambio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

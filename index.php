@@ -1,24 +1,26 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="#" />  
+    <link rel="shortcut icon" href="#" />
     <title>Puntos de Cambio</title>
-      
+
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">  
-      
-    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css"/>
-    <link rel="stylesheet"  type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
-           
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.datatables.min.css">
-  </head>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     
-  <body> 
-     <header>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.datatables.min.css">
+</head>
+
+<body>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#">Puntos de Cambio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,20 +40,14 @@
                 </ul>
             </div>
         </nav>
-     </header>    
-    <div style="height:50px"></div>
-     
+    </header>
+
     <!--Ejemplo tabla con DataTables-->
-    <body> 
-     
-    <div style="height:50px"></div>
-     
-    <!--Ejemplo tabla con DataTables-->
-    <div class="container">
+    <div class="container p-5">
         <div class="row">
-                <div class="col-lg-12">
-                    <div class="table-responsive">        
-                        <table id="excel" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table id="excel" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -69,21 +65,21 @@
                                 <th>GeneralesMenu.js</th>
                                 <th>Total</th>
                             </tr>
-                        </thead>     
-                       </table>                  
-                    </div>
+                        </thead>
+                    </table>
                 </div>
-        </div>  
-    </div>    
-     
+            </div>
+        </div>
+    </div>
+
 
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="popper/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-      
 
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>    
-     
+
+    <script type="text/javascript" src="datatables/datatables.min.js"></script>
+
 
     <!--Para usar los botones-->
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
@@ -93,17 +89,16 @@
     <!--Para los estilos en Excel-->
     <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min"></script>
-    
+
     <!-- <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script> -->
-    
-     
 
-    <script type="text/javascript" src="main.js"></script>  
-    
-    
-  </body>
-       
-  </body>
+
+
+    <script type="text/javascript" src="main.js"></script>
+
+
+</body>
+
 </html>
