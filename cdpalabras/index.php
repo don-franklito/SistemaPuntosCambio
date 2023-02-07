@@ -221,7 +221,7 @@ $rec = mysqli_query($con, $len);
                             </form>
 
                             <style type="text/css">
-                                thead tr .cabecera {
+                                .cabecera {
                                     position: sticky;
                                     top: 0;
                                     z-index: 10;

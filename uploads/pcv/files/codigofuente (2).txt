@@ -1,0 +1,73 @@
+ <html>
+  //comentario
+     /* hola
+*/
+ <head>
+     <script>
+     var gcc ;          // gcc == "Global Canvas Context"
+     var gap = [];      // gap == "Global Array of Particles"
+     var SINPI_4 = Math.sin(Math.PI/4);
+     var COSPI_4 = Math.cos(Math.PI/4);
+ 
+     function ObjectParticle(posX, posY, posZ){
+         this.posX = posX;
+         this.posY = posY;
+         this.posZ = posZ;
+         this.kgr  = 0.01;
+     }
+ 
+     function drawParticle(context, part) {
+             posX = part.posX - (0.5 * COSPI_4 * part.posY)            ;
+             posY =             (0.5 * part.posY*SINPI_4)              ;
+             context.moveTo(posX,posY);
+             posY-=                                         + part.posZ;
+             posX = part.posX - (0.5 * COSPI_4 * part.posY)            ;
+             context.lineTo(posX,posY);
+     }
+ 
+     function redrawCanvas() {
+         gcc.clearRect(0,0,1000,1000);
+         gcc.strokeStyle = "rgb(0,0,0)";
+         gcc.beginPath();
+         for (idx=0; idx<gap.length; idx++) {
+             drawParticle(gcc,gap[idx]);
+         }
+         gcc.stroke();   // <--- Or fill()
+     }
+ 
+     function simulatePhysics() {
+         // La física simulada es muy simple. Movimiento browniano.
+         for (idx=0; idx<gap.length; idx++) {
+             par = gap[idx];
+             par.posZ += (Math.random()-0.5);
+         }
+         redrawCanvas();
+     }
+ 
+     function initParticles() {
+         for (var posX=0; posX<=200; posX+=20){
+             for (var posY=0; posY<=200; posY+=20){
+                 gap.push(new ObjectParticle(posX, posY, 0));
+             }
+         }
+         return;
+     }
+ 
+     function initApp(){
+         canvas1 = document.getElementById('idCanvas1');
+         gcc  = canvas1.getContext('2d');
+         gcc.scale(1.5,1.5);
+         gcc.translate(100,50);
+         initParticles();
+         setInterval(simulatePhysics,100);
+     }
+ 
+     </script>
+     <style type="text/css">
+         canvas { border: 1px solid black; }
+     </style>
+ </head>
+ <body onload="initApp();" >
+     <canvas id="idCanvas1" width="500" height="500"></canvas>
+ </body>
+ </html>

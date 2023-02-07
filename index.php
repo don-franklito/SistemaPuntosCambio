@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
@@ -30,6 +30,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#"> Proyectos <span class="sr-only">(current)</span></a>
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="paginas/cargarArchivos.php">Archivos</a>
@@ -43,7 +44,8 @@
     </header>
 
     <!--Ejemplo tabla con DataTables-->
-    <div class="container p-5 ">
+    
+    <div class="container bg-light rounded p-5 "><h3>Puntos De Cambio</h3>
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
