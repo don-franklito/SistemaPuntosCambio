@@ -40,7 +40,7 @@ $rec = mysqli_query($con, $len);
     <script src="../js/alertas.notie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="bg-light p-5">
@@ -80,8 +80,8 @@ $rec = mysqli_query($con, $len);
     <div class=" rounded-3 container p-5 bg-light ">
         <div class="row">
             <div class="col-sm-4">
-                <p>Agregar palabra</p>
-                <form action="insertar.php" class="w-50" value="lenguaje" method="POST">
+                <h6>¿No encuentras la palabra en el listado? Agregala aquí</h6>
+                <form action="insertar.php" class="w-100" value="lenguaje" method="POST">
                     <input type="text" class="form-control mb-3" autofocus required placeholder="Palabra" name="palabraClave" id="palabraClave" value="<?php echo $_POST["palabraClave"] ?>">
                     <select name="lenguaje" id="lenguaje" class="form-select" value="<?php echo $_POST["lenguaje"] ?>">
                         <?php while ($fila = $rec->fetch_assoc()) : ?>
@@ -89,22 +89,34 @@ $rec = mysqli_query($con, $len);
                         <?php endwhile; ?>
                     </select>
                     <br>
-                    <input type="submit" class="btn btn-primary1">
+                    <input type="submit" class="btn btn-primary1" value="Guardar">
                 </form>
+               
+                <br>
+                <div class="content">
+                    <h6>¿No encuentras el lenguaje en el listado? Agregalo aquí</h6>
+                    <form action="insertarlenguaje.php" class="w-100" method="POST">
+                        <input type="text" name="nombreLenguaje" id="nombreLenguaje" class="form-control mb-3" autofocus required placeholder="Lenguaje">
+                        <input type="submit" class="btn btn-primary1" value="Guardar">
+                    </form>
+                </div>
             </div>
             <?php
 
-             if (isset($_GET['mensaje']) && $_GET['mensaje'] == 1) {
+            if (isset($_GET['mensaje']) && $_GET['mensaje'] == 1) {
                 unset($_GET['mensaje']);
                 //header("Location: index.php");
                 echo "<script>alertas(1);</script>";
 
-            }elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 2) {
+            }else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 2) {
                 echo "<script>alertas(2);</script>";
  
-            }elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 3) {
+            }else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 3) {
                 echo "<script>alertas(3);</script>"; 
-            } 
+            }  else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 4) {
+                unset($_GET['mensaje']);
+                echo "<script>alertas(4);</script>";
+            }
 
         
 
