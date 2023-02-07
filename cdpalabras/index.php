@@ -43,7 +43,7 @@ $rec = mysqli_query($con, $len);
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class=" p-5">
+<body class=" mt-xl-5 pt-5 ">
     <header>
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top ">
             <a class="navbar-brand" href="#">Puntos de Cambio</a>
@@ -77,9 +77,9 @@ $rec = mysqli_query($con, $len);
 
     ?>
 
-    <div class=" rounded-3 container p-5 bg-light ">
-        <div class="row">
-            <div class="col-sm-4">
+    <div class=" rounded-3 container p-5 bg-light mx-auto">
+        <div class="row ">
+            <div class="col-sm-4 pl-5 ">
                 <h6>¿No encuentras la palabra en el listado? Agregala aquí</h6>
                 <form action="insertar.php" class="w-100" value="lenguaje" method="POST">
                     <input type="text" class="form-control mb-3" autofocus required placeholder="Palabra" name="palabraClave" id="palabraClave" value="<?php echo $_POST["palabraClave"] ?>">
@@ -91,7 +91,7 @@ $rec = mysqli_query($con, $len);
                     <br>
                     <input type="submit" class="btn btn-primary1" value="Guardar">
                 </form>
-               
+
                 <br>
                 <div class="content">
                     <h6>¿No encuentras el lenguaje en el listado? Agregalo aquí</h6>
@@ -107,21 +107,19 @@ $rec = mysqli_query($con, $len);
                 unset($_GET['mensaje']);
                 //header("Location: index.php");
                 echo "<script>alertas(1);</script>";
-
-            }else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 2) {
+            } else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 2) {
                 echo "<script>alertas(2);</script>";
- 
-            }else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 3) {
-                echo "<script>alertas(3);</script>"; 
-            }  else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 4) {
+            } else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 3) {
+                echo "<script>alertas(3);</script>";
+            } else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 4) {
                 unset($_GET['mensaje']);
                 echo "<script>alertas(4);</script>";
             }
 
-        
 
-           
-    
+
+
+
             if (!isset($_POST['buscar'])) {
                 $_POST['buscar'] = '';
             }
@@ -132,7 +130,7 @@ $rec = mysqli_query($con, $len);
 
             ?>
 
-            <div class="col-sm-8 ">
+            <div class="col-sm-8 pl-5  ">
                 <div class="col-12 grid-margin">
                     <div class="">
                         <div class="card-body">
@@ -141,8 +139,8 @@ $rec = mysqli_query($con, $len);
                                 <div class="col-12 row">
 
                                     <div class="col-sm-6">
-                                        <label class=" form-label">Palabra a buscar</label>
-                                        <input type="text" class="w-50 form-control" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
+                                        <label class=" form-label  pl-2">Palabra a buscar</label>
+                                        <input type="text" class="w-50 form-control  ml-2" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
                                     </div>
 
                                     <div class=" row col-sm-6">
@@ -160,7 +158,7 @@ $rec = mysqli_query($con, $len);
                                             <option value="C#">C#</option>
                                         </select>
                                         <div class="col-4">
-                                            <input type="submit" class="w-100  btn btn-primary1 " value="Ver"">
+                                            <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
                                         </div>
 
                                     </div>
@@ -210,18 +208,27 @@ $rec = mysqli_query($con, $len);
                                 $numeroSql = mysqli_num_rows($sql);
 
                                 ?>
-                                <p class=" text-primary"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
+                                <p class=" text-primary pl-4"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
                             </form>
 
+                            <style type="text/css">
+                                thead tr .cabecera {
+                                    position: sticky;
+                                    top: 0;
+                                    z-index: 10;
+                                    }
 
-                            <div class="table-responsive">
-                                <table class="table">
+                            </style>
+
+
+                            <div class="table-responsive container w-100 ">
+                                <table class="table ">
                                     <thead>
-                                        <tr>
+                                        <tr class="">
 
-                                            <th class="bg-primary" style=" text-align: center;"> Palabras </th>
-                                            <th class="bg-primary" style=" text-align: center;"> Lenguaje </th>
-                                            <th class="bg-primary" style=" text-align: center;"> Acciones </th>
+                                            <th class="bg-primary cabecera" style=" text-align: center;"> Palabras </th>
+                                            <th class="bg-primary cabecera" style=" text-align: center;"> Lenguaje </th>
+                                            <th class="bg-primary cabecera" style=" text-align: center;"> Acciones </th>
 
                                         </tr>
                                     </thead>

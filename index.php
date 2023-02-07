@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    
+    <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.datatables.min.css">
 </head>
 
@@ -43,7 +43,7 @@
     </header>
 
     <!--Ejemplo tabla con DataTables-->
-    <div class="container p-5">
+    <div class="container p-5 ">
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
