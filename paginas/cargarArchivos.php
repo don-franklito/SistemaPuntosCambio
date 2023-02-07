@@ -4,7 +4,8 @@
   
 
 ?>
-<link rel="stylesheet" href="../css/botones.css">  
+<link rel="stylesheet" href="../css/botones.css"> 
+<link rel="stylesheet" href="../css/style.css"> 
 
 <body>
 
@@ -35,7 +36,7 @@
 
                 </div>
                 <!-- <a class="btn btn-primary" href="login">Atras</a> -->
-                <button type="submit" class="btn btn-primary1">Enviar</button>
+                <button type="submit" class="btn w-25 btn-primary1">Enviar</button>
 
             </form>
 

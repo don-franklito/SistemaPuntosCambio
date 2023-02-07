@@ -31,6 +31,8 @@ $numeroSql2 = mysqli_num_rows($sql2);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="../js/alertas.notie.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/botones.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
 </head>
@@ -57,8 +59,8 @@ $numeroSql2 = mysqli_num_rows($sql2);
             </div>
 
             <div>
-                <input type="submit" class=" btn btn-primary btn-block" value="Actualizar">
-                <a class="w-100 mt-3 btn btn-primary btn-bloc" href="index.php">Regresar</a>
+                <input type="submit" class="btn btn-primary1 btn-bloc w-100" value="Actualizar">
+                <a class="w-100 mt-3 btn btn-primary1 btn-bloc" href="index.php">Regresar</a>
             </div>
 
         </form>

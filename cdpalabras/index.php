@@ -35,6 +35,7 @@ $rec = mysqli_query($con, $len);
     <link rel="stylesheet" href="/PC/SistemaPuntosCambio/css/menu.css">
     <link rel="stylesheet" href="../css/plugins/notie.min.css">
     <link rel="stylesheet" href="../css/botones.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="../js/plugins/notie.min.js"></script>
     <script src="../js/alertas.notie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
@@ -79,7 +80,7 @@ $rec = mysqli_query($con, $len);
     <div class=" rounded-3 container p-5 bg-light ">
         <div class="row">
             <div class="col-sm-4">
-                <h5>Agregar palabra</h5>
+                <p>Agregar palabra</p>
                 <form action="insertar.php" class="w-50" value="lenguaje" method="POST">
                     <input type="text" class="form-control mb-3" autofocus required placeholder="Palabra" name="palabraClave" id="palabraClave" value="<?php echo $_POST["palabraClave"] ?>">
                     <select name="lenguaje" id="lenguaje" class="form-select" value="<?php echo $_POST["lenguaje"] ?>">
