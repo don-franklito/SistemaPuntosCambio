@@ -1,37 +1,30 @@
 <?php
-    function buscarMultiplesPalabrasTabla($nombreCarpeta) {
-        $palabras = array(
-            "if",
-            "for",
-            "cout",
-            "while"    );
-        if (is_dir($nombreCarpeta)) {
-            if ($dh = opendir($nombreCarpeta)) {
-                echo "<table border='1'>";
-                echo "<tr><th>Nombre Archivo</th>";
-                foreach ($palabras as $palabra) {
-                    echo "<th>" . $palabra . "</th>";
-                }
-                echo "</tr>";
-                while (($archivo = readdir($dh)) !== false) {
-                    if ($archivo != "." && $archivo != "..") {
-                        $nombreArchivo = basename($nombreCarpeta . "/" . $archivo);
-                        $contenido = file_get_contents($nombreCarpeta . "/" . $archivo);
-                        $result = array_fill_keys($palabras, 0);
-                        foreach ($palabras as $palabra) {
-                            $result[$palabra] = substr_count($contenido, $palabra);
-                        }
-                        echo "<tr><td>" . $nombreArchivo . "</td>";
-                        foreach ($result as $palabra => $count) {
-                            echo "<td>" . $count . "</td>";
-                        }
-                        echo "</tr>";
+function buscarPalabraArray($nombreCarpeta) {
+    
+    $palabras= array(
+        "if",
+        "for",
+        "while");
+
+    if (is_dir($nombreCarpeta)) {
+        if ($dh = opendir($nombreCarpeta)) {
+            $resultados = array();
+            while (($archivo = readdir($dh)) !== false) {
+                if($archivo != "." && $archivo != "..") {
+                    $rutaArchivo = $nombreCarpeta."/".$archivo;
+                    $contenido = file_get_contents($rutaArchivo);
+                    $result = array_fill_keys($palabras, 0);
+                    foreach ($palabras as $palabra) {
+                        $result[$palabra] = substr_count($contenido, $palabra);
                     }
+                    $resultados[$rutaArchivo] = $result;
                 }
-                echo "</table>";
-                closedir($dh);
             }
+            closedir($dh);
+            return $resultados;
         }
     }
-    buscarMultiplesPalabrasTabla('C:/xampp/htdocs/crudpalabras/jvh-crud');
+}
+$resultados = buscarPalabraArray('C:/xampp/htdocs/crudpalabras/jvh-crud');
+var_dump($resultados);
 ?>
