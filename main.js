@@ -13,7 +13,7 @@ $(document).ready(function() {
                     text:'Exportar a Excel',
                     className:'btn btn-success',
                     excelStyles:{
-                        template:'header_blue'
+                        template:'header_blue'   
                     }
                 }
             ]
