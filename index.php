@@ -45,7 +45,7 @@
         <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">        
-                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="excel" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -65,6 +65,7 @@
                                 <th>Puntos de Cambio resueltos</th>
                                 <th>Puntos de Cambio Probados</th>
                                 <th>Lineas de puntos de cambio</th>
+                                <th>Total</th>
                             </tr>
                         </thead>     
                        </table>                  
@@ -77,14 +78,25 @@
     <script src="popper/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
       
+
     <script type="text/javascript" src="datatables/datatables.min.js"></script>    
      
-    <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-    <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+
+    <!--Para usar los botones-->
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+
+    <!--Para los estilos en Excel-->
+    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min"></script>
+    
+    <!-- <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script> -->
+    
      
+
     <script type="text/javascript" src="main.js"></script>  
        
   </body>
