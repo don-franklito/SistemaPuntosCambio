@@ -22,6 +22,14 @@ function alertas(mensaje) {
 
     });
 
+  } else if(mensaje == 4) {
+    notie.alert({
+      type: 4,
+      text: "El lenguaje que desea agregar ya existe",
+      time: 2
+
+    });
+
   }
 }
 
