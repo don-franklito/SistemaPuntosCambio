@@ -3,13 +3,15 @@ include("conexion.php");
 $con = conectar();
 
 $id = $_GET['id'];
+$idlenguaje = $_GET['idleng'];
 
 $sql = "SELECT * FROM palabras p INNER JOIN lenguaje l ON p.fk_id_pal = l.id_leng WHERE id_pal = '$id'";
 $query = mysqli_query($con, $sql);
 
 $row = mysqli_fetch_array($query);
 
-$len = "SELECT * FROM lenguaje";
+$len = "SELECT * FROM lenguaje WHERE id_leng != $idlenguaje";
+$lengSeleccionado = "SELECT * FROM lenguaje WHERE id_leng = $idlenguaje";
 
 $sql2 = $con->query($len);
 $numeroSql2 = mysqli_num_rows($sql2);
@@ -51,7 +53,7 @@ $numeroSql2 = mysqli_num_rows($sql2);
             <div>
                 <input type="text" class="form-control mb-3 " name="palabraClave" value="<?php echo $row['nombre_pal']  ?>">
                 <select name="lenguaje" id="lenguaje" class="form-control mb-3 ">
-
+                    <option value="<?php echo $row['id_leng'] ?>"> <?= $row['nombre_leng'] ?> </option>
                     <?php while ($fila = $sql2->fetch_assoc()) : ?>
                         <option class="w-50" value="<?= $fila['id_leng'] ?>"><?= $fila['nombre_leng'] ?></option>
                     <?php endwhile; ?>

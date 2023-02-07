@@ -116,6 +116,15 @@ $rec = mysqli_query($con, $len);
             }  else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 4) {
                 unset($_GET['mensaje']);
                 echo "<script>alertas(4);</script>";
+            } else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 5) {
+                unset($_GET['mensaje']);
+                echo "<script>alertas(5);</script>";
+            } else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 6) {
+                unset($_GET['mensaje']);
+                echo "<script>alertas(6);</script>";
+            } else if (isset($_GET['mensaje']) && $_GET['mensaje'] == 7) {
+                unset($_GET['mensaje']);
+                echo "<script>alertas(7);</script>";
             }
 
         
@@ -226,6 +235,7 @@ $rec = mysqli_query($con, $len);
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
                                         <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
 
                                             <tr>
@@ -233,7 +243,7 @@ $rec = mysqli_query($con, $len);
                                                 <td style="text-align: center;" class=""><?php echo $rowSql["nombre_pal"]; ?></td>
                                                 <td style="text-align: center;" class=""><?php echo $rowSql["nombre_leng"]; ?></td>
                                                 <td class="border border-0 d-flex justify-content-around mb-3">
-                                                    <a class="btn btn-edit btn-bloc text-light " href="actualizar.php?id=<?php echo $rowSql['id_pal'] ?>" class=" text-success">Editar</a>
+                                                    <a class="btn btn-edit btn-bloc text-light " href="actualizar.php?id=<?php echo $rowSql['id_pal'] ?>&idleng=<?php echo $rowSql['id_leng'] ?>" class=" text-success">Editar</a>
                                                     <a onclick=" return confirmar();" class="btn btn-delete btn-bloc text-light text-danger" href="delete.php?id=<?php echo $rowSql['id_pal'] ?>">Eliminar</a>
 
                                                 </td>
@@ -267,7 +277,7 @@ $rec = mysqli_query($con, $len);
     <script src="../datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
 
     <script type="text/javascript" src="../main.js"></script>
-
+  
 </body>
 
 </html>
