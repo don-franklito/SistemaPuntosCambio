@@ -37,8 +37,15 @@ $con = conectar();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
+<<<<<<< HEAD
                         <a class="nav-link" href="#"> Proyectos <span class="sr-only">(current)</span></a>
 
+=======
+                        <a class="nav-link" href="#"> Proyectos <span class="sr-only">(current)</span></a>                       
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vulnerabilidades.php">Vulnerabilidades</a>
+>>>>>>> e406d4e21dd679bf0d804067617ed08debc0709b
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="paginas/cargarArchivos.php">Archivos</a>
@@ -46,6 +53,7 @@ $con = conectar();
                     <li class="nav-item">
                         <a class="nav-link" href="cdpalabras/index.php">Palabras</a>
                     </li>
+                    
                 </ul>
             </div>
         </nav>

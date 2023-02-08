@@ -54,8 +54,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"> Proyectos <span class="sr-only">(current)</span></a>
-
+                        <a class="nav-link" href="index.php"> Proyectos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="paginas/cargarArchivos.php">Archivos</a>
@@ -93,6 +92,29 @@
                                 <th style="background-color: green;">Baja </th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <tr>
+                                <td>ID</td>
+                                <td>
+                                    <select name="aps" id="aps">
+                                        <option value="1">APS 5</option>
+                                        <option value="1">APS 6</option>
+                                    </select>
+                                </td>
+                                <td>Nombre del Componente</td>
+                                <td>Descripción</td>
+                                <td>Nombre de Proyecto</td>
+                                <td>Asignado</td>
+                                <td>Estatus</td>
+                                <td>Avance Desarollo %</td>
+                                <td>Avance Pruebas %</td>
+                                <td>Pruebas</td>
+                                <td>Desarollo</td>
+                                <td><input type="number" name="alta" id="" style="width: 50px;"></td>
+                                <td><input type="number" name="media" id="" style="width: 50px;"></td>
+                                <td><input type="number" name="baja" id="" style="width: 50px;"> </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -31,7 +31,7 @@ $rec = mysqli_query($con, $len);
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../main.css">
+    
     <link rel="stylesheet" href="/PC/SistemaPuntosCambio/css/menu.css">
     <link rel="stylesheet" href="../css/plugins/notie.min.css">
     <link rel="stylesheet" href="../css/botones.css">
@@ -54,6 +54,9 @@ $rec = mysqli_query($con, $len);
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="../index.php"> Proyectos </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../vulnerabilidades.php"> Vulnerabilidades </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../paginas/cargarArchivos.php">Archivos</a>
@@ -229,11 +232,10 @@ $rec = mysqli_query($con, $len);
                             </style>
 
 
-                            <div class="table-responsive container w-100 ">
+                            <div class="table-responsive">
                                 <table class="table ">
                                     <thead>
-                                        <tr class="">
-
+                                        <tr>
                                             <th class="bg-primary cabecera" style=" text-align: center;"> Palabras </th>
                                             <th class="bg-primary cabecera" style=" text-align: center;"> Lenguaje </th>
                                             <th class="bg-primary cabecera" style=" text-align: center;"> Acciones </th>
@@ -262,7 +264,7 @@ $rec = mysqli_query($con, $len);
                                 </table>
                             </div>
 
-
+                            <a class="w-25 mt-3 btn btn-primary1 btn-bloc" href="../paginas/cargarArchivos.php">Regresar</a>
                         </div>
                     </div>
                 </div>
