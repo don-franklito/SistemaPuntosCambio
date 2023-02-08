@@ -7,13 +7,23 @@
     <title>Vulnerabilidades</title>
       
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">  
+    <link rel="stylesheet" href="../main.css">  
       
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css"/>
     <link rel="stylesheet"  type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
            
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
       
+    <style>
+            div.dataTables_wrapper div.dataTables_filter label{
+                font-weight: normal;
+                white-space: nowrap;
+                text-align: right;
+                visibility: hidden 
+            }
+        </style>
+
+
   </head>
     
   <body> 
