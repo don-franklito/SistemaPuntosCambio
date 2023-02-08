@@ -77,7 +77,7 @@ $rec = mysqli_query($con, $len);
 
     ?>
 
-    <div class=" rounded-3 container p-5 bg-light mx-auto">
+    <main class=" rounded-3 container p-5 bg-light mx-auto">
         <div class="row ">
             <div class="col-sm-4 pl-5 ">
                 <h6>¿No encuentras la palabra en el listado? Agregala aquí</h6>
@@ -225,8 +225,7 @@ $rec = mysqli_query($con, $len);
                                     position: sticky;
                                     top: 0;
                                     z-index: 10;
-                                    }
-
+                                }
                             </style>
 
 
@@ -242,7 +241,7 @@ $rec = mysqli_query($con, $len);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                         <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
 
                                             <tr>
@@ -269,7 +268,7 @@ $rec = mysqli_query($con, $len);
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <script src="../jquery/jquery-3.3.1.min.js"></script>
     <script src="../popper/popper.min.js"></script>
@@ -284,7 +283,7 @@ $rec = mysqli_query($con, $len);
     <script src="../datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
 
     <script type="text/javascript" src="../main.js"></script>
-  
+
 </body>
 
 </html>

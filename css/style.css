@@ -130,8 +130,9 @@ input[type="submit"]:hover {
   text-decoration: underline;
 }
 
-thead tr .cabecera {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  }
+.responsive2{
+  background-color: lightblue;
+  height: 40px;
+  width: 200px;
+  overflow-y: scroll;
+}

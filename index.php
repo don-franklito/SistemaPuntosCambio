@@ -1,3 +1,9 @@
+<?php
+include("./cdpalabras/conexion.php");
+$con = conectar();
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -9,6 +15,8 @@
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./css/botones.css">
+
     <link rel="stylesheet" href="/css/style.css">
 
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
@@ -30,7 +38,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="#"> Proyectos <span class="sr-only">(current)</span></a>
-                        
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="paginas/cargarArchivos.php">Archivos</a>
@@ -44,12 +52,134 @@
     </header>
 
     <!--Ejemplo tabla con DataTables-->
-    
-    <div class="container bg-light rounded p-5 "><h3>Puntos De Cambio</h3>
+    <main class="controunded-3 container-fluid mx-auto bg-light ">
+        <div>
+            <h3>Puntos De Cambio</h3>
+            <div>
+                <?php
+                if (!isset($_POST['buscar'])) {
+                    $_POST['buscar'] = '';
+                }
+                if (!isset($_POST['APS'])) {
+                    $_POST['APS'] = '';
+                }
+                if (!isset($_POST['estatus'])) {
+                    $_POST['estatus'] = '';
+                }
+
+
+                ?>
+                <div class=" pl-5  ">
+                    <div class=" ">
+                        <div class="">
+                            <form id="form2" name="form2" method="POST" action="index.php">
+                                <div class=" row">
+                                    <div class="row ">
+                                        <label class=" form-label  pl-2">Buscar</label>
+                                        <input type="text" class="w-50 form-control  ml-2" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
+                                    </div>
+
+                                    <div class=" row ">
+                                        <label class=" form-label pl-2"">APS</label>
+                                        <select id="assigned-tutor-filter " id="APS" name="APS" class="w-50  form-control ml-2" style="border: #bababa 1px solid; ">
+                                            <?php if ($_POST["APS"] != '') { ?>
+                                                <option value="<?php echo $_POST["APS"]; ?>"><?php echo $_POST["APS"]; ?></option>
+                                            <?php } ?>
+                                            <option value="">Todos</option>
+                                            <option value="APS_5">APS5</option>
+                                            <option value="APS_6">APS6</option>
+
+                                        </select>
+
+                                        <div class="">
+                                            <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
+                                    </div>
+                                </div>
+
+                                <div class=" row ">
+                                    <label class=" form-label pl-2"">Estatus</label>
+                                            <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-50 col-8 form-control ml-2" style="border: #bababa 1px solid; ">
+                                                <?php if ($_POST["APS"] != '') { ?>
+                                                    <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["status"]; ?></option>
+                                                <?php } ?>
+                                                <option value="">Todos</option>
+                                                <option value="Produccion">Produccion</option>
+                                                <option value="En_Proceso">En Proceso</option>
+                                                <option value="NO_PRODUCTIVA">NO_PRODUCTIVA</option>
+                                            </select>
+                                            <div class="">
+                                                <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <?php
+
+                        /*FILTRO de busqueda*/
+
+
+
+                        if ($_POST['buscar'] == '') {
+                            $_POST['buscar'] = ' ';
+                        }
+                        $aKeyword = explode(" ", $_POST['buscar']);
+
+
+                        if ($_POST["buscar"] == '' and $_POST['APS'] == '') {
+                            $query = "SELECT * FROM palabras AS p  JOIN lenguaje AS l ON p.fk_id_pal = l.id_leng ";
+                        } else {
+
+
+                            $query =  "SELECT * FROM palabras AS p JOIN lenguaje AS l ON p.fk_id_pal = l.id_leng";
+
+                            if ($_POST["buscar"] != '') {
+                                $query .= " WHERE (nombre_pal LIKE LOWER('%" . $aKeyword[0] . "%') OR nombre_leng LIKE LOWER('%" . $aKeyword[0] . "%')) ";
+
+                                for ($i = 1; $i < count($aKeyword); $i++) {
+                                    if (!empty($aKeyword[$i])) {
+                                        $query .= " OR nombre_pal LIKE '%" . $aKeyword[$i] . "%' OR nombre_leng LIKE '%" . $aKeyword[$i] . "%'";
+                                    }
+                                }
+                            }
+
+                            if ($_POST["APS"] != '') {
+                                $query .= " AND nombre_leng = '" . $_POST['APS'] . "' ";
+                            }
+                        }
+
+
+                        $sql = $con->query($query);
+
+                        $numeroSql = mysqli_num_rows($sql);
+
+                        ?>
+                        <p class=" text-primary pl-4"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
+                            </form>
+
+                            <!-- <style type="text/css">
+                            .cabecera {
+                                position: sticky;
+                                top: 0;
+                                z-index: 10;
+                            }
+                        </style> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
+
             <div class="col-lg-12">
-                <div class="table-responsive">
-                    <table id="excel" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+                <div class="table-responsive h-50 mx-auto ">
+                <small> <table id="excel" class="table table-striped table-bordered responsive2 h-50 " cellspacing="0">
+
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -68,12 +198,36 @@
                                 <th>Total</th>
                             </tr>
                         </thead>
-                    </table>
+
+
+                        <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
+
+                            <tr>
+
+                                <td class=""><?php echo $rowSql["nombre_pal"]; ?></td>
+                                <td class=""><?php echo $rowSql["nombre_leng"]; ?></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+
+                        <?php } ?>
+
+                    </table></small>
                 </div>
             </div>
         </div>
-    </div>
-
+    </main>
 
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="popper/popper.min.js"></script>
