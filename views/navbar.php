@@ -10,6 +10,12 @@
                         <a class="nav-link" href="../index.php"> Proyectos </a>
                     </li> -->
                     <li class="nav-item">
+                        <a class="nav-link" href="../index.php"> Proyectos </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../vulnerabilidades.php"> Vulnerabilidades </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="../cdpalabras/index.php">Palabras</a>
                     </li>                   
                 </ul>
