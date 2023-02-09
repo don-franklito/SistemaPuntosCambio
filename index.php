@@ -1,3 +1,60 @@
+<?php 
+
+$path_completo = $_FILES['envioarchivos']['name'];
+$path_completo = str_replace('.zip', '', $path_completo);
+
+$ruta = $_FILES['envioarchivos']["tmp_name"];
+
+// Función descomprimir 
+$zip = new ZipArchive;
+if ($zip->open($ruta) === TRUE) {
+    //función para extraer el ZIP
+    $extraido = $zip->extractTo('uploads/');
+    
+    $zip->close();
+
+    $dir = opendir('uploads/'.$path_completo);
+    buscarMultiplesPalabrasTabla('uploads/'.$path_completo);
+}
+else {
+
+}
+
+
+$arr = array();
+function buscarMultiplesPalabrasTabla($nombreCarpeta) {
+
+    $palabras= array(
+        "if",
+        "for",
+        "while"
+    );
+
+    global $resultados;
+
+    if (is_dir($nombreCarpeta)) {
+        if ($dh = opendir($nombreCarpeta)) {
+            while (($archivo = readdir($dh)) ) {
+                if($archivo != "." && $archivo != "..") {
+                    $rutaArchivo = $nombreCarpeta."/".$archivo;
+                    $contenido = file_get_contents($rutaArchivo);
+                    $result = array_fill_keys($palabras, 0);
+                    foreach ($palabras as $palabra) {
+                        $result[$palabra] = substr_count($contenido, $palabra);
+                    }
+                   $resultados[] = array(
+                        'archivo' => $rutaArchivo,
+                        'resultados' => $result
+                    );
+                }
+            }
+            closedir($dh);
+        }
+    }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -57,7 +114,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>APS</th>
-                                <th>Nombre del Componente</th>
+                                <th>Nombre archivo</th>
                                 <th>Descripción</th>
                                 <th>Ruta</th>
                                 <th>Asignado</th>
@@ -70,6 +127,26 @@
                                 <th>GeneralesMenu.js</th>
                                 <th>Total</th>
                             </tr>
+                            <?php 
+                                foreach($resultados as $value){
+                                    echo "<tr>";
+                                    echo "<td>prueba</td>";
+                                    echo "<td>prueba2</td>";
+                                    echo "<td>".$value['archivo']."</td>";
+                                    echo "<td>pruebadescripcion</td>";
+                                    echo "<td>".$value['archivo']."</td>";
+                                    echo "<td>prueba asignado</td>";
+                                    echo "<td>prueba estatus</td>";
+                                    echo "<td>prueba avance</td>";
+                                    echo "<td>prueba avance pruebas</td>";
+                                    echo "<td>prueba arreglos</td>";
+                                    echo "<td>prueba rutas</td>";
+                                    echo "<td>prueba import</td>";
+                                    echo "<td>prueba generakes</td>";
+                                    echo "<td>prueba total</td>";
+                                    echo "</tr>";
+                                }
+                            ?>
                         </thead>
                     </table>
                 </div>
