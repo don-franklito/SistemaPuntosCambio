@@ -82,34 +82,34 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
 
                                     <div class=" row ">
                                         <label class=" form-label pl-2"">APS</label>
-                                        <select id="assigned-tutor-filter " id="APS" name="APS" class="w-50  form-control ml-2" style="border: #bababa 1px solid; ">
+                                        <select id=" assigned-tutor-filter " id=" APS" name="APS" class="w-50  form-control ml-2" style="border: #bababa 1px solid; ">
                                             <?php if ($_POST["APS"] != '') { ?>
                                                 <option value="<?php echo $_POST["APS"]; ?>"><?php echo $_POST["APS"]; ?></option>
                                             <?php } ?>
                                             <option value="">Todos</option>
-                                            <option value="APS5">APS5</option>
-                                            <option value="APS6">APS6</option>
+                                            <option value="APS 5">APS5</option>
+                                            <option value="APS 6">APS6</option>
 
-                                        </select>
+                                            </select>
 
-                                        <div class="">
-                                            <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
+                                            <div class="">
+                                                <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
                                     </div>
                                 </div>
 
                                 <div class=" row ">
-                                    <label class=" form-label pl-2"">Estatus</label>
-                                            <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-50 col-8 form-control ml-2" style="border: #bababa 1px solid; ">
-                                                <?php if ($_POST["APS"] != '') { ?>
-                                                    <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["status"]; ?></option>
-                                                <?php } ?>
-                                                <option value="">Todos</option>
-                                                <option value="Produccion">Produccion</option>
-                                                <option value="En_Proceso">En Proceso</option>
-                                                <option value="NO_PRODUCTIVA">NO_PRODUCTIVA</option>
-                                            </select>
-                                            <div class="">
-                                                <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
+                                    <label class=" form-label pl-2"">Estatus </label>
+                                        <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-50 col-8 form-control ml-2" style="border: #bababa 1px solid; ">
+                                            <?php if ($_POST["estatus"] != '') { ?>
+                                                <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["estatus"]; ?></option>
+                                            <?php } ?>
+                                            <option value="">Todos</option>
+                                            <option value="Produccion">Produccion</option>
+                                            <option value="En_Proceso">En Proceso</option>
+                                            <option value="NO_PRODUCTIVA">NO PRODUCTIVA</option>
+                                        </select>
+                                        <div class="">
+                                            <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
                         $aKeyword = explode(" ", $_POST['buscar']);
 
 
-                        if ($_POST["buscar"] == '' and $_POST['APS'] == '') {
+                        if ($_POST["buscar"] == '' and $_POST['APS'] == '' and $_POST['estatus'] == '') {
                             $query = "SELECT  id_pdc AS ID, a.nombre_aps AS APS, s.url_sis AS URL, p.descripcion_pdc AS Descripcion, s.estatus_sis AS Estatus, p.total_pdc AS PuntosCambio, p.aprobados_pdc AS PuntosCambioAprobados, p.resuelto_pdc AS PuntosCambioResueltos, p.lineas_pdc AS LineasPuntosCambio FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
                         } else {
 
@@ -152,14 +152,17 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
                                         $query .= " OR id_pdc LIKE '%" . $aKeyword[$i] . "%' OR a.nombre_aps LIKE '%" . $aKeyword[$i] . "%'
                                                     OR s.url_sis LIKE '%" . $aKeyword[$i] . "%' OR p.descripcion_pdc LIKE '%" . $aKeyword[$i] . "%'
                                                     OR s.estatus_sis LIKE '%" . $aKeyword[$i] . "%' OR p.total_pdc LIKE '%" . $aKeyword[$i] . "%'
-                                                    OR p.aprobados_pdc LIKE '%" . $aKeyword[$i] . "%' OR p.resuelto_pdc LIKE '%" . $aKeyword[$i] 
-                                                    . "%' OR p.lineas_pdc LIKE '%" . $aKeyword[$i] . "%'";
+                                                    OR p.aprobados_pdc LIKE '%" . $aKeyword[$i] . "%' OR p.resuelto_pdc LIKE '%" . $aKeyword[$i]
+                                            . "%' OR p.lineas_pdc LIKE '%" . $aKeyword[$i] . "%'";
                                     }
                                 }
                             }
 
                             if ($_POST["APS"] != '') {
-                                $query .= " AND nombre_leng = '" . $_POST['APS'] . "' ";
+                                $query .= "AND a.nombre_aps = '" . $_POST['APS'] . "' ";
+                            }
+                            if ($_POST["estatus"] != '') {
+                                $query .= "AND s.estatus_sis = '" . $_POST['estatus'] . "' ";
                             }
                         }
 
@@ -191,52 +194,63 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
             <div class="col-lg-12 h-75">
 
                 <div class="table-responsive h-75 mx-auto ">
-                <small> <table id="excel" class="table table-striped table-bordered responsive2 h-50 " cellspacing="0">
+                    <small>
+                        <table id="excel" class="table table-striped table-bordered responsive2 h-50 " cellspacing="0">
 
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>APS</th>
-                                <th>Nombre del Componente</th>
-                                <th>Descripción</th>
-                                <th>Ruta</th>
-                                <th>Asignado</th>
-                                <th>Estatus</th>
-                                <th>AD %</th>
-                                <th>AP %</th>
-                                <th>Arreglos</th>
-                                <th>Rutas</th>
-                                <th>Import</th>
-                                <th>GeneralesMenu.js</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>APS</th>
+                                    <th>Nombre del Componente</th>
+                                    <th>Descripción</th>
+                                    <th>Ruta</th>
+                                    <th>Asignado</th>
+                                    <th>Estatus</th>
+                                    <th>AD %</th>
+                                    <th>AP %</th>
+                                    <th>Arreglos</th>
+                                    <th>Rutas</th>
+                                    <th>Import</th>
+                                    <th>GeneralesMenu.js</th>
+                                    <th>PC</th>
+                                    <th>PC resuelto</th>
+                                    <th>PC Probados</th>
+                                    <th>lineas PC</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
 
 
-                        <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
+                            <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
 
-                            <tr>
+                                <tr>
 
-                                <td class=""><?php echo $rowSql["id_pdc"]; ?></td>
-                                <td class=""><?php echo $rowSql["nombre_aps"]; ?></td>
-                                <td></td>
-                                <td class=""><?php echo $rowSql["p.descripcion_pdc"]; ?></td>
-                                <td class=""><?php echo $rowSql["s.url_sis"]; ?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <td class=""><?php echo $rowSql["id_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["nombre_aps"]; ?></td>
+                                    <td></td>
+                                    <td class=""><?php echo $rowSql["p.descripcion_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["s.url_sis"]; ?></td>
+                                    <td></td>
+                                    <td class=""><?php echo $rowSql["s.url_sis"]; ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class=""><?php echo $rowSql["p.total_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["p.resuelto_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["p.aprobados_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["p.lineas_pdc"]; ?></td>
+                                    <td></td>
 
-                            </tr>
+                                </tr>
 
-                        <?php } ?>
+                            <?php } ?>
 
-                    </table><small>
+                        </table><small>
                 </div>
             </div>
         </div>
