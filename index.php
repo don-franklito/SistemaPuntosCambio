@@ -1,6 +1,7 @@
 <?php
 include("./cdpalabras/conexion.php");
 $con = conectar();
+$sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
 ?>
 
 
@@ -86,8 +87,8 @@ $con = conectar();
                                                 <option value="<?php echo $_POST["APS"]; ?>"><?php echo $_POST["APS"]; ?></option>
                                             <?php } ?>
                                             <option value="">Todos</option>
-                                            <option value="APS_5">APS5</option>
-                                            <option value="APS_6">APS6</option>
+                                            <option value="APS5">APS5</option>
+                                            <option value="APS6">APS6</option>
 
                                         </select>
 
@@ -129,18 +130,30 @@ $con = conectar();
 
 
                         if ($_POST["buscar"] == '' and $_POST['APS'] == '') {
-                            $query = "SELECT * FROM palabras AS p  JOIN lenguaje AS l ON p.fk_id_pal = l.id_leng ";
+                            $query = "SELECT  id_pdc AS ID, a.nombre_aps AS APS, s.url_sis AS URL, p.descripcion_pdc AS Descripcion, s.estatus_sis AS Estatus, p.total_pdc AS PuntosCambio, p.aprobados_pdc AS PuntosCambioAprobados, p.resuelto_pdc AS PuntosCambioResueltos, p.lineas_pdc AS LineasPuntosCambio FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
                         } else {
 
 
-                            $query =  "SELECT * FROM palabras AS p JOIN lenguaje AS l ON p.fk_id_pal = l.id_leng";
+                            $query =  "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
 
                             if ($_POST["buscar"] != '') {
-                                $query .= " WHERE (nombre_pal LIKE LOWER('%" . $aKeyword[0] . "%') OR nombre_leng LIKE LOWER('%" . $aKeyword[0] . "%')) ";
+                                $query .= " WHERE (id_pdc LIKE LOWER('%" . $aKeyword[0] . "%') 
+                                            OR a.nombre_aps LIKE LOWER('%" . $aKeyword[0] . "%') 
+                                            OR s.url_sis LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR p.descripcion_pdc LIKE LOWER('%" . $aKeyword[0] . "%') 
+                                            OR s.estatus_sis LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR p.total_pdc LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR p.aprobados_pdc LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR p.resuelto_pdc LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR p.lineas_pdc LIKE LOWER('%" . $aKeyword[0] . "%')) ";
 
                                 for ($i = 1; $i < count($aKeyword); $i++) {
                                     if (!empty($aKeyword[$i])) {
-                                        $query .= " OR nombre_pal LIKE '%" . $aKeyword[$i] . "%' OR nombre_leng LIKE '%" . $aKeyword[$i] . "%'";
+                                        $query .= " OR id_pdc LIKE '%" . $aKeyword[$i] . "%' OR a.nombre_aps LIKE '%" . $aKeyword[$i] . "%'
+                                                    OR s.url_sis LIKE '%" . $aKeyword[$i] . "%' OR p.descripcion_pdc LIKE '%" . $aKeyword[$i] . "%'
+                                                    OR s.estatus_sis LIKE '%" . $aKeyword[$i] . "%' OR p.total_pdc LIKE '%" . $aKeyword[$i] . "%'
+                                                    OR p.aprobados_pdc LIKE '%" . $aKeyword[$i] . "%' OR p.resuelto_pdc LIKE '%" . $aKeyword[$i] 
+                                                    . "%' OR p.lineas_pdc LIKE '%" . $aKeyword[$i] . "%'";
                                     }
                                 }
                             }
@@ -175,9 +188,9 @@ $con = conectar();
 
         <div class="row">
 
-            <div class="col-lg-12">
+            <div class="col-lg-12 h-75">
 
-                <div class="table-responsive h-50 mx-auto ">
+                <div class="table-responsive h-75 mx-auto ">
                 <small> <table id="excel" class="table table-striped table-bordered responsive2 h-50 " cellspacing="0">
 
                         <thead>
@@ -189,8 +202,8 @@ $con = conectar();
                                 <th>Ruta</th>
                                 <th>Asignado</th>
                                 <th>Estatus</th>
-                                <th>Avance Desarollo %</th>
-                                <th>Avance Pruebas %</th>
+                                <th>AD %</th>
+                                <th>AP %</th>
                                 <th>Arreglos</th>
                                 <th>Rutas</th>
                                 <th>Import</th>
@@ -204,11 +217,11 @@ $con = conectar();
 
                             <tr>
 
-                                <td class=""><?php echo $rowSql["nombre_pal"]; ?></td>
-                                <td class=""><?php echo $rowSql["nombre_leng"]; ?></td>
+                                <td class=""><?php echo $rowSql["id_pdc"]; ?></td>
+                                <td class=""><?php echo $rowSql["nombre_aps"]; ?></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
+                                <td class=""><?php echo $rowSql["p.descripcion_pdc"]; ?></td>
+                                <td class=""><?php echo $rowSql["s.url_sis"]; ?></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
