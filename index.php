@@ -1,7 +1,9 @@
 <?php
 include("./cdpalabras/conexion.php");
 $con = conectar();
-$sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
+$sql = "SELECT *  FROM aps";
+$rec3 = mysqli_query($con, $sql);
+
 ?>
 
 
@@ -13,7 +15,7 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="#" />
     <title>Puntos de Cambio</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">  
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/botones.css">
 
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
@@ -31,8 +33,8 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
             text-align: right;
             visibility: hidden
         }
-            
-        div.dataTables_wrapper div.dataTables_length label{
+
+        div.dataTables_wrapper div.dataTables_length label {
             font-weight: normal;
             text-align: left;
             white-space: nowrap;
@@ -100,35 +102,36 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
                                     </div>
 
                                     <div class=" col-3 row ">
-            
+
                                         <select id=" assigned-tutor-filter " id=" APS" name="APS" class="w-75  form-control" style="border: #bababa 1px solid; ">
                                             <?php if ($_POST["APS"] != '') { ?>
                                                 <option value="<?php echo $_POST["APS"]; ?>"><?php echo $_POST["APS"]; ?></option>
                                             <?php } ?>
                                             <option value="">Todos</option>
-                                            <option value="APS 5">APS5</option>
-                                            <option value="APS 6">APS6</option>
+                                            <?php while ($fila3 = $rec3->fetch_assoc()) : ?>
+                                                <option value="<?= $fila3['nombre_aps'] ?>"><?= $fila3['nombre_aps'] ?></option>
+                                            <?php endwhile; ?>
                                         </select>
-                                            
-                                        <input type="submit" class="w-25  btn btn-primary1" value="Ver">
-                                </div>
 
-                                <div class=" col-3 row ">
-                                    
-                                    <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-75 form-control" style="border: #bababa 1px solid; ">
-                                        <?php if ($_POST["estatus"] != '') { ?>
-                                            <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["estatus"]; ?></option>
-                                        <?php } ?>
-                                        <option value="">Todos</option>
-                                        <option value="Produccion">Produccion</option>
-                                        <option value="En Proceso">En Proceso</option>
-                                        <option value="NO PRODUCTIVA">NO PRODUCTIVA</option>
-                                    </select>
-                                
-                                    <input type="submit" class="w-25  btn btn-primary1" value="Ver">
-                               
+                                        <input type="submit" class="w-25  btn btn-primary1" value="Ver">
+                                    </div>
+
+                                    <div class=" col-3 row ">
+
+                                        <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-75 form-control" style="border: #bababa 1px solid; ">
+                                            <?php if ($_POST["estatus"] != '') { ?>
+                                                <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["estatus"]; ?></option>
+                                            <?php } ?>
+                                            <option value="">Todos</option>
+                                            <option value="Produccion">Produccion</option>
+                                            <option value="En Proceso">En Proceso</option>
+                                            <option value="NO PRODUCTIVA">NO PRODUCTIVA</option>
+                                        </select>
+
+                                        <input type="submit" class="w-25  btn btn-primary1" value="Ver">
+
+                                    </div>
                                 </div>
-                            </div>
                         </div>
 
 
@@ -189,9 +192,9 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
 
                         ?>
                         <p class=" text-primary pl-4"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
-                            </form>
+                        </form>
 
-                            <!-- <style type="text/css">
+                        <!-- <style type="text/css">
                             .cabecera {
                                 position: sticky;
                                 top: 0;
@@ -199,10 +202,10 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
                             }
                         </style> -->
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <div class="row">

@@ -13,6 +13,9 @@ $row = mysqli_fetch_array($query);
 $len = "SELECT * FROM lenguaje";
 $rec = mysqli_query($con, $len);
 
+$len2 = "SELECT * FROM lenguaje";
+$rec2 = mysqli_query($con, $len2);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,16 +148,15 @@ $rec = mysqli_query($con, $len);
                                 </div>
 
                                 <div class="row col-sm-6">
-                                    <select id="assigned-tutor-filter" id="buscarLenguaje" name="buscarLenguaje" class="w-50 col-8 form-control " style="border: #bababa 1px solid; ">
-                                        <?php if ($_POST["buscarLenguaje"] != '') { ?>
-                                            <option value="<?php echo $_POST["buscarLenguaje"]; ?>"><?php echo $_POST["buscarLenguaje"]; ?></option>
-                                        <?php } ?>
+                                    <select id="assigned-tutor-filter" id="buscarLenguaje" name="buscarLenguaje" class="w-50 col-8 form-select " style="border: #bababa 1px solid;  value="<?php echo $_POST["buscarLenguaje"] ?>">
+                                        
                                         <option value="">Todos</option>
-                                        <option value="Java">Java</option>
-                                        <option value="Javascript">Javascript</option>
-                                        <option value="Python">Python</option>
-                                        <option value="C++">C++</option>
-                                        <option value="C#">C#</option>
+
+                                        <?php while ($fila2 = $rec2->fetch_assoc()) : ?>
+                                            <option value="<?= $fila2['nombre_leng'] ?>"><?= $fila2['nombre_leng'] ?></option>
+                                        <?php endwhile; ?>
+                                   
+                                        
                                     </select>
                                     <div class="col-4">
                                         <input type="submit" class="w-100  btn btn-primary1" value="Ver">
