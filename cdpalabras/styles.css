@@ -6,15 +6,20 @@
     color: #fff;
 }
 
-/* .container {
-    margin-top: 2rem;
-} */
-
 .table-responsive {
-    width: 620px;
+    width: 100%;
     height: 300px;
 }
 
 .text-primary {
     margin-top: 0.5rem;
 }
+
+.card-body {
+    padding: 0 1rem;
+}
+
+#regresar {
+    float: right;
+}
+
