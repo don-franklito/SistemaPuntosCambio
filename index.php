@@ -39,11 +39,21 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
             visibility: hidden
         }
 
+        .container {
+            padding: 15px;
+        }
+
         .row {
             display: -ms-flexbox;
             display: flex;
             gap: 5px;
             flex-wrap: nowrap;
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1280px;
+            }
         }
     </style>
 </head>
@@ -73,7 +83,7 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
     </header>
 
     <!--Ejemplo tabla con DataTables-->
-    <main class="controunded-3 container-fluid mx-auto bg-light ">
+    <main class="container bg-light ">
         <div>
             <h3>Puntos De Cambio</h3>
             <div>
@@ -188,7 +198,7 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
                         $numeroSql = mysqli_num_rows($sql);
 
                         ?>
-                        <p class=" text-primary pl-4"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
+                        <p class=" text-primary"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
                             </form>
 
                             <!-- <style type="text/css">
