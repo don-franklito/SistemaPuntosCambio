@@ -13,12 +13,8 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="#" />
     <title>Puntos de Cambio</title>
-
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">  
     <link rel="stylesheet" href="./css/botones.css">
-
-    <link rel="stylesheet" href="/css/style.css">
 
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
@@ -26,6 +22,30 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.datatables.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: right;
+            visibility: hidden
+        }
+            
+        div.dataTables_wrapper div.dataTables_length label{
+            font-weight: normal;
+            text-align: left;
+            white-space: nowrap;
+            visibility: hidden
+        }
+
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            gap: 5px;
+            flex-wrap: nowrap;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,47 +90,43 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
 
 
                 ?>
-                <div class=" pl-5  ">
+                <div class="">
                     <div class=" ">
                         <div class="">
                             <form id="form2" name="form2" method="POST" action="index.php">
-                                <div class=" row">
-                                    <div class="row ">
-                                        <label class=" form-label  pl-2">Buscar</label>
-                                        <input type="text" class="w-50 form-control  ml-2" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
+                                <div class="col-sm-12 row">
+                                    <div class="col-3 row">
+                                        <input type="text" class="w-100 form-control" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
                                     </div>
 
-                                    <div class=" row ">
-                                        <label class=" form-label pl-2"">APS</label>
-                                        <select id=" assigned-tutor-filter " id=" APS" name="APS" class="w-50  form-control ml-2" style="border: #bababa 1px solid; ">
+                                    <div class=" col-3 row ">
+            
+                                        <select id=" assigned-tutor-filter " id=" APS" name="APS" class="w-75  form-control" style="border: #bababa 1px solid; ">
                                             <?php if ($_POST["APS"] != '') { ?>
                                                 <option value="<?php echo $_POST["APS"]; ?>"><?php echo $_POST["APS"]; ?></option>
                                             <?php } ?>
                                             <option value="">Todos</option>
                                             <option value="APS 5">APS5</option>
                                             <option value="APS 6">APS6</option>
-
-                                            </select>
-
-                                            <div class="">
-                                                <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
-                                    </div>
+                                        </select>
+                                            
+                                        <input type="submit" class="w-25  btn btn-primary1" value="Ver">
                                 </div>
 
-                                <div class=" row ">
-                                    <label class=" form-label pl-2"">Estatus </label>
-                                        <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-50 col-8 form-control ml-2" style="border: #bababa 1px solid; ">
-                                            <?php if ($_POST["estatus"] != '') { ?>
-                                                <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["estatus"]; ?></option>
-                                            <?php } ?>
-                                            <option value="">Todos</option>
-                                            <option value="Produccion">Produccion</option>
-                                            <option value="En_Proceso">En Proceso</option>
-                                            <option value="NO_PRODUCTIVA">NO PRODUCTIVA</option>
-                                        </select>
-                                        <div class="">
-                                            <input type="submit" class="w-100  btn btn-primary1  ml-4" value="Ver"">
-                                    </div>
+                                <div class=" col-3 row ">
+                                    
+                                    <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-75 form-control" style="border: #bababa 1px solid; ">
+                                        <?php if ($_POST["estatus"] != '') { ?>
+                                            <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["estatus"]; ?></option>
+                                        <?php } ?>
+                                        <option value="">Todos</option>
+                                        <option value="Produccion">Produccion</option>
+                                        <option value="En Proceso">En Proceso</option>
+                                        <option value="NO PRODUCTIVA">NO PRODUCTIVA</option>
+                                    </select>
+                                
+                                    <input type="submit" class="w-25  btn btn-primary1" value="Ver">
+                               
                                 </div>
                             </div>
                         </div>
@@ -201,22 +217,16 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
                                 <tr>
                                     <th>ID</th>
                                     <th>APS</th>
-                                    <th>Nombre del Componente</th>
                                     <th>Descripción</th>
                                     <th>Ruta</th>
                                     <th>Asignado</th>
                                     <th>Estatus</th>
-                                    <th>AD %</th>
-                                    <th>AP %</th>
-                                    <th>Arreglos</th>
-                                    <th>Rutas</th>
-                                    <th>Import</th>
-                                    <th>GeneralesMenu.js</th>
+                                    <th>AD%</th>
+                                    <th>AP%</th>
                                     <th>PC</th>
-                                    <th>PC resuelto</th>
-                                    <th>PC Probados</th>
-                                    <th>lineas PC</th>
-                                    <th>Total</th>
+                                    <th>PCR</th>
+                                    <th>PCP</th>
+                                    <th>LPC</th>
                                 </tr>
                             </thead>
 
@@ -227,25 +237,16 @@ $sql = "SELECT * FROM pdc p INNER JOIN sistema s ON p.fk_id_sis_pdc = s.id_sis I
 
                                     <td class=""><?php echo $rowSql["id_pdc"]; ?></td>
                                     <td class=""><?php echo $rowSql["nombre_aps"]; ?></td>
+                                    <td class=""><?php echo $rowSql["descripcion_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["url_sis"]; ?></td>
                                     <td></td>
-                                    <td class=""><?php echo $rowSql["p.descripcion_pdc"]; ?></td>
-                                    <td class=""><?php echo $rowSql["s.url_sis"]; ?></td>
-                                    <td></td>
-                                    <td class=""><?php echo $rowSql["s.url_sis"]; ?></td>
-                                    <td></td>
+                                    <td class=""><?php echo $rowSql["estatus_sis"]; ?></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class=""><?php echo $rowSql["p.total_pdc"]; ?></td>
-                                    <td class=""><?php echo $rowSql["p.resuelto_pdc"]; ?></td>
-                                    <td class=""><?php echo $rowSql["p.aprobados_pdc"]; ?></td>
-                                    <td class=""><?php echo $rowSql["p.lineas_pdc"]; ?></td>
-                                    <td></td>
-
+                                    <td class=""><?php echo $rowSql["total_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["resuelto_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["aprobados_pdc"]; ?></td>
+                                    <td class=""><?php echo $rowSql["lineas_pdc"]; ?></td>
                                 </tr>
 
                             <?php } ?>
