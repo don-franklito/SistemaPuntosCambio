@@ -41,11 +41,21 @@ $rec3 = mysqli_query($con, $sql);
             visibility: hidden
         }
 
+        .container {
+            padding: 15px;
+        }
+
         .row {
             display: -ms-flexbox;
             display: flex;
             gap: 5px;
             flex-wrap: nowrap;
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1280px;
+            }
         }
     </style>
 </head>
@@ -75,7 +85,7 @@ $rec3 = mysqli_query($con, $sql);
     </header>
 
     <!--Ejemplo tabla con DataTables-->
-    <main class="controunded-3 container-fluid mx-auto bg-light ">
+    <main class="container bg-light ">
         <div>
             <h3>Puntos De Cambio</h3>
             <div>
@@ -191,8 +201,13 @@ $rec3 = mysqli_query($con, $sql);
                         $numeroSql = mysqli_num_rows($sql);
 
                         ?>
+<<<<<<< HEAD
                         <p class=" text-primary pl-4"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
                         </form>
+=======
+                        <p class=" text-primary"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
+                            </form>
+>>>>>>> f127a2b4178324b6b7c5e85bfb5cd71c41fb47da
 
                         <!-- <style type="text/css">
                             .cabecera {
