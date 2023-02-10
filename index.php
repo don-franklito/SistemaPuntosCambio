@@ -201,13 +201,8 @@ $rec3 = mysqli_query($con, $sql);
                         $numeroSql = mysqli_num_rows($sql);
 
                         ?>
-<<<<<<< HEAD
-                        <p class=" text-primary pl-4"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
-                        </form>
-=======
                         <p class=" text-primary"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
                             </form>
->>>>>>> f127a2b4178324b6b7c5e85bfb5cd71c41fb47da
 
                         <!-- <style type="text/css">
                             .cabecera {
