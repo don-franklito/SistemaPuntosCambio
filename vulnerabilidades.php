@@ -1,3 +1,12 @@
+<?php
+include("./cdpalabras/conexion.php");
+$con = conectar();
+$sql = "SELECT *  FROM aps";
+$rec3 = mysqli_query($con, $sql);
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -9,6 +18,7 @@
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./css/botones.css">
 
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
@@ -36,10 +46,41 @@
     <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
     <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script> -->
 
-
-
     <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 
+    <style>
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: right;
+            visibility: hidden
+        }
+
+        div.dataTables_wrapper div.dataTables_length label {
+            font-weight: normal;
+            text-align: left;
+            white-space: nowrap;
+            visibility: hidden
+        }
+
+        .container {
+            padding: 15px;
+        }
+
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            gap: 5px;
+            flex-wrap: nowrap;
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1280px;
+            }
+        }
+    </style>
 
 </head>
 
@@ -68,60 +109,215 @@
     </header>
 
     <!--Ejemplo tabla con DataTables-->
-    
-    <div class="container bg-light rounded p-5"><H3>Vulneravilidades</H3>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive">
-                    <table id="excel" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>APS</th>
-                                <th>Nombre del Componente</th>
-                                <th>Descripción</th>
-                                <th>Nombre de Proyecto</th>
-                                <th>Asignado</th>
-                                <th>Estatus</th>
-                                <th>Avance Desarollo %</th>
-                                <th>Avance Pruebas %</th>
-                                <th>Pruebas</th>
-                                <th>Desarollo</th>
-                                <th style="background-color: red;">Alta</th>
-                                <th style="background-color: rgb(196, 196, 0);">Media</th>
-                                <th style="background-color: green;">Baja </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ID</td>
-                                <td>
-                                    <select name="aps" id="aps">
-                                        <option value="1">APS 5</option>
-                                        <option value="1">APS 6</option>
-                                    </select>
-                                </td>
-                                <td>Nombre del Componente</td>
-                                <td>Descripción</td>
-                                <td>Nombre de Proyecto</td>
-                                <td>Asignado</td>
-                                <td>Estatus</td>
-                                <td>Avance Desarollo %</td>
-                                <td>Avance Pruebas %</td>
-                                <td>Pruebas</td>
-                                <td>Desarollo</td>
-                                <td><input type="number" name="alta" id="" style="width: 50px;"></td>
-                                <td><input type="number" name="media" id="" style="width: 50px;"></td>
-                                <td><input type="number" name="baja" id="" style="width: 50px;"> </td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <main class="container bg-light ">
+        <div>
+            <H3>Vulnerabilidades</H3>
+            <div>
+                <?php
+                if (!isset($_POST['buscar'])) {
+                    $_POST['buscar'] = '';
+                }
+                if (!isset($_POST['APS'])) {
+                    $_POST['APS'] = '';
+                }
+                if (!isset($_POST['estatus'])) {
+                    $_POST['estatus'] = '';
+                }
+
+
+                ?>
+                <div class="">
+                    <div class=" ">
+                        <div class="">
+                            <form id="form2" name="form2" method="POST" action="vulnerabilidades.php">
+                                <div class="col-sm-12 row">
+                                    <div class="col-3 row">
+                                        <input type="text" class="w-100 form-control" id="buscar" placeholder="Palabra" name="buscar" value="<?php echo $_POST["buscar"] ?>">
+                                    </div>
+
+                                    <div class=" col-3 row ">
+
+                                        <select id=" assigned-tutor-filter " id=" APS" name="APS" class="w-75  form-control" style="border: #bababa 1px solid; ">
+                                            <?php if ($_POST["APS"] != '') { ?>
+                                                <option value="<?php echo $_POST["APS"]; ?>"><?php echo $_POST["APS"]; ?></option>
+                                            <?php } ?>
+                                            <option value="">Todos</option>
+                                            <?php while ($fila3 = $rec3->fetch_assoc()) : ?>
+                                                <option value="<?= $fila3['nombre_aps'] ?>"><?= $fila3['nombre_aps'] ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+
+                                        <input type="submit" class="w-25  btn btn-primary1" value="Ver">
+                                    </div>
+
+                                    <div class=" col-3 row ">
+
+                                        <select id="assigned-tutor-filter " id="estatus" name="estatus" class="w-75 form-control" style="border: #bababa 1px solid; ">
+                                            <?php if ($_POST["estatus"] != '') { ?>
+                                                <option value="<?php echo $_POST["estatus"]; ?>"><?php echo $_POST["estatus"]; ?></option>
+                                            <?php } ?>
+                                            <option value="">Todos</option>
+                                            <option value="Produccion">Produccion</option>
+                                            <option value="En Proceso">En Proceso</option>
+                                            <option value="NO PRODUCTIVA">NO PRODUCTIVA</option>
+                                        </select>
+
+                                        <input type="submit" class="w-25  btn btn-primary1" value="Ver">
+
+                                    </div>
+                                </div>
+                        </div>
+
+
+
+                        <?php
+
+                        /*FILTRO de busqueda*/
+
+
+
+                        if ($_POST['buscar'] == '') {
+                            $_POST['buscar'] = ' ';
+                        }
+                        $aKeyword = explode(" ", $_POST['buscar']);
+
+
+                        if ($_POST["buscar"] == '' and $_POST['APS'] == '' and $_POST['estatus'] == '') {
+                            $query = "SELECT id_vu AS ID, a.nombre_aps AS APS, s.url_sis AS URL, s.estatus_sis AS Estatus, v.alta_vu AS Alta,
+                            v.media_vu AS Media, v.baja_vu AS Baja,(v.alta_vu + v.media_vu + v.baja_vu) AS Total
+                            FROM `vunerabilidad` v INNER JOIN sistema s ON v.fk_id_sis_vu = id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
+                        } else {
+
+
+                            $query = "SELECT * FROM `vunerabilidad` v INNER JOIN sistema s ON v.fk_id_sis_vu = id_sis INNER JOIN aps a ON s.fk_folio_aps = a.folio";
+
+                            if ($_POST["buscar"] != '') {
+                                $query .= " WHERE (id_vu LIKE LOWER('%" . $aKeyword[0] . "%') 
+                                            OR a.nombre_aps LIKE LOWER('%" . $aKeyword[0] . "%') 
+                                            OR s.url_sis LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR s.estatus_sis LIKE LOWER('%" . $aKeyword[0] . "%') 
+                                            OR v.alta_vu LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR v.media_vu LIKE LOWER('%" . $aKeyword[0] . "%')
+                                            OR v.baja_vu LIKE LOWER('%" . $aKeyword[0] . "%')) ";
+
+                                for ($i = 1; $i < count($aKeyword); $i++) {
+                                    if (!empty($aKeyword[$i])) {
+                                        $query .= " OR id_vu LIKE '%" . $aKeyword[$i] . "%' OR a.nombre_aps LIKE '%" . $aKeyword[$i] . "%'
+                                                    OR s.url_sis LIKE '%" . $aKeyword[$i] . "%' OR s.estatus_sis LIKE '%" . $aKeyword[$i] . "%'
+                                                    OR v.alta_vu LIKE '%" . $aKeyword[$i] . "%' OR v.media_vu LIKE '%" . $aKeyword[$i] . "%'
+                                                    OR v.baja_vu LIKE '%" . $aKeyword[$i] . "%'";
+                                    }
+                                }
+                            }
+
+                            if ($_POST["APS"] != '') {
+                                $query .= "AND a.nombre_aps = '" . $_POST['APS'] . "' ";
+                            }
+                            if ($_POST["estatus"] != '') {
+                                $query .= "AND s.estatus_sis = '" . $_POST['estatus'] . "' ";
+                            }
+                        }
+
+
+                        $sql = $con->query($query);
+
+                        $numeroSql = mysqli_num_rows($sql);
+
+                        ?>
+                        <p class=" text-primary"><i class="mdi mdi-file-document"></i> <?php echo $numeroSql; ?> Resultados encontrados</p>
+                        </form>
+
+                        <!-- <style type="text/css">
+                            .cabecera {
+                                position: sticky;
+                                top: 0;
+                                z-index: 10;
+                            }
+                        </style> -->
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
-    
+
+        <div class="row">
+            <div class="col-lg-12 h-75">
+                <div class="table-responsive h-75 mx-auto">
+                    <small>
+                        <table id="excel" class="table table-striped table-bordered h-50" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>APS</th>
+                                    <th>Nombre del Componente</th>
+                                    <th>Descripción</th>
+                                    <th>Nombre de Proyecto</th>
+                                    <th>Asignado</th>
+                                    <th>Estatus</th>
+                                    <th>AD %</th>
+                                    <th>AP %</th>
+                                    <th>Pruebas</th>
+                                    <th>Desarollo</th>
+                                    <th style="background-color: red;">Alta</th>
+                                    <th style="background-color: rgb(196, 196, 0);">Media</th>
+                                    <th style="background-color: green;">Baja </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <!-- <tr>
+                                    <td>ID</td>
+                                    <td>
+                                        <select name="aps" id="aps">
+                                            <option value="1">APS 5</option>
+                                            <option value="1">APS 6</option>
+                                        </select>
+                                    </td>
+                                    <td>Nombre del Componente</td>
+                                    <td>Descripción</td>
+                                    <td>Nombre de Proyecto</td>
+                                    <td>Asignado</td>
+                                    <td>Estatus</td>
+                                    <td>Avance Desarollo %</td>
+                                    <td>Avance Pruebas %</td>
+                                    <td>Pruebas</td>
+                                    <td>Desarollo</td>
+                                    <td><input type="number" name="alta" id="" style="width: 50px;"></td>
+                                    <td><input type="number" name="media" id="" style="width: 50px;"></td>
+                                    <td><input type="number" name="baja" id="" style="width: 50px;"> </td>
+                                </tr>
+  -->
+                                <?php while ($rowSql = $sql->fetch_assoc()) {   ?>
+
+                                    <tr>
+
+                                        <td ><?php echo $rowSql["id_vu"]; ?></td>
+                                        <td ><?php echo $rowSql["nombre_aps"]; ?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><?php echo $rowSql["estatus_sis"]; ?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><?php echo $rowSql["alta_vu"]; ?></td>
+                                        <td><?php echo $rowSql["media_vu"]; ?></td>
+                                        <td><?php echo $rowSql["baja_vu"]; ?></td>
+                                    </tr>
+
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
 
 </body>
 
